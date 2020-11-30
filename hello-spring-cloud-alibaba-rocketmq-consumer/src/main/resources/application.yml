@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: rocketmq-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8841
+    stream:
+      rocketmq:
+        binder:  # RocketMQ 服务器地址
+          name-server: 192.168.187.128:9876
+      bindings:
+        input5:
+          destination: pull-topic
+          content-type: text/json
+          group: pull-topic-group
+        input4:
+          destination: TransactionTopic
+          content-type: text/json
+          consumer:
+            concurrency: 5
+          group: transaction-group
+        input3:
+          destination: test-topic
+          content-type: application/json
+          consumer:
+            concurrency: 20
+          group: test-group3
+        input2:
+          destination: test-topic
+          content-type: text/json
+          consumer:
+            maxAttempts: 1
+            concurrency: 20
+          group: test-group2
+        input1:
+          destination: test-topic
+          content-type: text/json
+          group: test-group1
+#    stream:
+#      rocketmq:
+#        binder:
+#          # RocketMQ 服务器地址
+#          name-server: 192.168.187.128:9876
+#      bindings:
+#        input: {destination: test-topic1, content-type: text/plain, group: test-group, consumer.maxAttempts: 1}
+
+server:
+  port: 9094
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

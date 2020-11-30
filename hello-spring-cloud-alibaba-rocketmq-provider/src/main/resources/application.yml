@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: rocketmq-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8841
+
+#      bindings:
+        # 这里是个 Map 类型参数，{} 为 YAML 中 Map 的行内写法
+#        output1: {destination: test-topic1, content-type: application/json}
+#        output2: {destination: test-topic2, content-type: application/json}
+    stream:
+      rocketmq:
+        binder:
+          # RocketMQ 服务器地址
+          name-server: 192.168.187.128:9876
+      bindings:
+        output3:
+          destination: pull-topic
+          content-type: text/plain
+        output1:
+          destination: test-topic
+          content-type: application/json
+        output2:
+          destination: TransactionTopic
+          content-type: application/json
+
+server:
+  port: 9093
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

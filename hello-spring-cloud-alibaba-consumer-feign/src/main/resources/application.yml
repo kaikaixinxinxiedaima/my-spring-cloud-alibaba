@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: consumer-feign
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8841
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+        # 当前应用被sentinel监控的端口
+        port: 8719
+      # sentinel 持久化到nacos
+      datasource:
+        ds:
+          nacos:
+            server-addr: 127.0.0.1:8841
+            data-id: ${spring.application.name}-sentinel
+            group-id: DEFAULT_GROUP
+            data-type: json #数据格式
+            rule-type: flow
+
+server:
+  port: 9092
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#sentinel
+feign:
+  sentinel:
+    enabled: true

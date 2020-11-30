@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8841
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8081
+        # 当前应用被sentinel监控的端口
+        port: 8720
+
+server:
+  port: 9091
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
