@@ -1,3 +1,6 @@
+server:
+  port: 9094
+
 spring:
   application:
     name: rocketmq-consumer
@@ -45,8 +48,7 @@ spring:
 #      bindings:
 #        input: {destination: test-topic1, content-type: text/plain, group: test-group, consumer.maxAttempts: 1}
 
-server:
-  port: 9094
+
 
 management:
   endpoints:

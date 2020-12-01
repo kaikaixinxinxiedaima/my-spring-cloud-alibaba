@@ -1,3 +1,6 @@
+server:
+  port: 9966
+
 spring:
   application:
     name: spring-cloud-stream
@@ -33,6 +36,5 @@ spring:
 
 
 
-server:
-  port: 9966
+
 

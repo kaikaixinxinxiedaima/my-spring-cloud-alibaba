@@ -1,3 +1,6 @@
+server:
+  port: 9091
+
 spring:
   application:
     name: consumer
@@ -11,8 +14,6 @@ spring:
         # 当前应用被sentinel监控的端口
         port: 8720
 
-server:
-  port: 9091
 
 management:
   endpoints:

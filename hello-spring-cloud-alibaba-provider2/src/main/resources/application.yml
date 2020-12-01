@@ -1,0 +1,58 @@
+spring:
+# 数据库配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/springboot-0?useSSL=true&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&serverTimezone=UTC
+    username: root
+    password: 123456
+    druid:
+      maxActive: 20
+      initialSize: 1
+      maxWait: 600000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: provider2-service
+
+
+#mybatis配置
+mybatis:
+  typeAliasesPackage: cn.mirrorming.hello.spring.cloud.alibaba.provider.dto # 配置別名
+  mapperLocations: classpath*:mapping/*.xml #注意点：在classpath后面的*必不可少，缺少星号的话后面的通配符不起作用。  **表示可以表示任意多级目录  *表示多个任意字符
+  # 驼峰命名规范 如：数据库字段是  order_id 那么 实体字段就要写成 orderId
+  configuration:
+    map-underscore-to-camel-case: true
+
+#通用mapper配置
+mapper:
+  #枚举按简单类型处理，如果有枚举字段则需要加上该配置才会做映射
+  enum-as-simple-type: true
+  identity: MYSQL
+  #设置以后，会去判断 insert 和 update 中符串类型!=’’
+  not-empty: true
+  mappers: tk.mybatis.mapper.common.BaseMapper
+
+
+
+seata:
+  enabled: true
+  service:
+    vgroup-mapping:
+      provider2-service: default
+    grouplist:
+      default: 127.0.0.1:8091
+    disable-global-transaction: false
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8841

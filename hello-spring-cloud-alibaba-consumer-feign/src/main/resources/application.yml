@@ -1,3 +1,6 @@
+server:
+  port: 9092
+
 spring:
   application:
     name: consumer-feign
@@ -19,9 +22,11 @@ spring:
             group-id: DEFAULT_GROUP
             data-type: json #数据格式
             rule-type: flow
+    alibaba:
+      seata:
+        tx-service-group: ${spring.application.name}-seata
 
-server:
-  port: 9092
+
 
 management:
   endpoints:
@@ -33,3 +38,37 @@ management:
 feign:
   sentinel:
     enabled: true
+
+# seata 配置
+seata:
+  enabled: true
+  client:
+    rm-report-success-enable: true
+    rm-table-meta-check-enable: false # 自动刷新缓存中的表结构（默认false）
+    rm-report-retry-count: 5 # 一阶段结果上报TC重试次数（默认5）
+    rm-async-commit-buffer-limit: 1000 # 异步提交缓存队列长度（默认10000）
+    rm:
+      lock:
+        lock-retry-internal: 10 # 校验或占用全局锁重试间隔（默认10ms）
+        lock-retry-times: 30 # 校验或占用全局锁重试次数（默认30）
+        lock-retry-policy-branch-rollback-on-conflict: true # 分支事务与其它全局回滚事务冲突时锁策略（优先释放本地锁让回滚成功）
+    tm-commit-retry-count: 3 # 一阶段全局提交结果上报TC重试次数（默认1次，建议大于1）
+    tm-rollback-retry-count: 3 # 一阶段全局回滚结果上报TC重试次数（默认1次，建议大于1）
+    undo:
+      undo-data-validation: true # 二阶段回滚镜像校验（默认true开启）
+      undo-log-serialization: jackson # undo序列化方式（默认jackson）
+      undo-log-table: undo_log  # 自定义undo表名（默认undo_log）
+    log:
+      exceptionRate: 100 # 日志异常输出概率（默认100）
+    support:
+      spring-datasource-autoproxy: true # 数据源自动代理开关（默认false关闭）
+  service:
+    vgroup-mapping:
+      consumer-feign-seata: default
+    grouplist:
+      default: 127.0.0.1:8091
+    disable-global-transaction: false
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8841

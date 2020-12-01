@@ -1,3 +1,6 @@
+server:
+  port: 9093
+
 spring:
   application:
     name: rocketmq-provider
@@ -26,8 +29,7 @@ spring:
           destination: TransactionTopic
           content-type: application/json
 
-server:
-  port: 9093
+
 management:
   endpoints:
     web:

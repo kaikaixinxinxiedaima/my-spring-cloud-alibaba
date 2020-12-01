@@ -1,3 +1,6 @@
+server:
+  port: 9000
+
 spring:
   application:
     # 应用名称
@@ -37,10 +40,6 @@ spring:
           predicates:
             - Method=GET,POST
             - Path=/consumer-feign/**
-
-
-server:
-  port: 9000
 
 
 # 配置日志级别，方别调试
