@@ -17,7 +17,8 @@ spring:
       rocketmq:
         binder:
           # RocketMQ 服务器地址
-          name-server: 192.168.187.128:9876
+          # name-server: 127.0.0.1:9876,127.0.0.1:9870
+          namesrv-addr: 127.0.0.1:9876,127.0.0.1:9870
       bindings:
         output3:
           destination: pull-topic

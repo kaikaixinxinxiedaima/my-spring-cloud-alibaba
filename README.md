@@ -1081,6 +1081,7 @@ public class TestNacosConfigController {
     @GetMapping(value = "/hi")
     public String getNameFromNacosConfig() {
         return "Hello " + applicationContext.getEnvironment().getProperty("user.name");
+
     }
 }
 ```

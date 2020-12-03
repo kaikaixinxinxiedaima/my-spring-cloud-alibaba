@@ -17,7 +17,7 @@ spring:
       bindings:
         myMessageInput:
           group: article # 分组之后多个实例只有一个收到消息
-          content-type: application/json1
+          content-type: application/json
 
 
   #    stream:
