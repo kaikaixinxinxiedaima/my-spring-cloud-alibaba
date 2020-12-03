@@ -1,0 +1,9 @@
+input3 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ
+input2 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ
+input1 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ
+input2 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ
+input1 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ
+input3 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ
+input1 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ
+input2 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ
+input3 receive: 延时消息测试2020-12-03 16:22Hello RocketMQ

@@ -1,5 +1,5 @@
 server:
-  port: 9094
+  port: ${random.int[10000,19999]}
 
 spring:
   application:
@@ -13,6 +13,25 @@ spring:
         binder:  # RocketMQ 服务器地址
           # name-server: 127.0.0.1:9876,127.0.0.1:9870
           namesrv-addr: 127.0.0.1:9876,127.0.0.1:9870
+        # ??? consumer配置在这里才生效
+        bindings:
+          input3:
+            consumer:
+              concurrency: 2
+              enabled: true # 是否开启消费，默认为 true
+          input2:
+            consumer:
+              # 最大尝试次数
+              maxAttempts: 1
+              # 定制消费者线程数,默认情况下，每个Binding对应的消费者线程数是1
+              # 比如下面的配置就指定了名称为input2的Binding的消费者线程是20，
+              # 即Spring Cloud Stream将同时启动20个线程用于从名为input2的Binding进行消费
+              #            concurrency: 20
+              enabled: true # 是否开启消费，默认为 true
+              broadcasting: true # 是否使用广播消费，默认为 false（使用集群消费）
+          input1:
+            consumer:
+              enabled: true # 是否开启消费，默认为 true
 
       bindings:
         input5:
@@ -22,26 +41,22 @@ spring:
         input4:
           destination: TransactionTopic
           content-type: text/json
-          consumer:
-            concurrency: 5
+#          consumer:
+#            concurrency: 5
           group: transaction-group
         input3:
           destination: test-topic
           content-type: application/json
-          consumer:
-            concurrency: 20
           group: test-group3
         input2:
           destination: test-topic
-          content-type: text/json
-          consumer:
-            maxAttempts: 1
-            concurrency: 20
+          content-type: application/json
           group: test-group2
         input1:
           destination: test-topic
-          content-type: text/json
+          content-type: application/json
           group: test-group1
+
 #    stream:
 #      rocketmq:
 #        binder:

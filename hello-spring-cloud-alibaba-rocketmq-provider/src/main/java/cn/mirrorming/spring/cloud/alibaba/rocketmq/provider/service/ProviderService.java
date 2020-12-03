@@ -28,7 +28,7 @@ public class ProviderService {
 
 
     public void send(String msg) {
-        LongStream.range(1, 100).forEach(i -> {
+        LongStream.range(1, 11).forEach(i -> {
             try {
                 senderService.sendTimeout("延时消息测试"
                         + new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()) + msg, i, "标签" + i);
