@@ -1,5 +1,6 @@
 package cn.mirrorming.spring.cloud.alibaba.consumer.controller;
 
+import com.example.demo.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -20,6 +21,9 @@ public class ConsumerController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private DemoService demoService;
+
     @Value("${spring.application.name}")
     private String appName;
 
@@ -29,5 +33,14 @@ public class ConsumerController {
         ServiceInstance serviceInstance = loadBalancerClient.choose("provider");
         String url = String.format("http://%s:%s/echo/%s", serviceInstance.getHost(), serviceInstance.getPort(), appName);
         return restTemplate.getForObject(url, String.class);
+    }
+
+    /**
+     * 测试自定义starter
+     * @return
+     */
+    @GetMapping(value = "/testStarter")
+    public String testStarter() {
+        return demoService.say();
     }
 }
