@@ -29,6 +29,7 @@ hello-spring-cloud-alibaba-rocketmq-consumer/target
 hello-spring-cloud-alibaba-rocketmq-provider/target
 hello-spring-cloud-external-skywalking/target
 hello-spring-cloud-stream-rabbitmq/target
+demo-spring-boot-starter/target
 *.iml
 */target
 target
