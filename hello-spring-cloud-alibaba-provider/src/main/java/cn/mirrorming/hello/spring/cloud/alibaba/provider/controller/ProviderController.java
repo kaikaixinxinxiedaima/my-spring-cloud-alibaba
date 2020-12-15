@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +27,9 @@ public class ProviderController {
 
 
     @GetMapping(value = "/echo/{message}")
-    public String echo(@PathVariable String message) {
+    public String echo(@PathVariable String message, HttpServletRequest request) {
+        String token = request.getHeader("token");
+        System.out.println("token："+token);
         return "Hello Nacos Discovery " + message + " , From port :" + port;
     }
 

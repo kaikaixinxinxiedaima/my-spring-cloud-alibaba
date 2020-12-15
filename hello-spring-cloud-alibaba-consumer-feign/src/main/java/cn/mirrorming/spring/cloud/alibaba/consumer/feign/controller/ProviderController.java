@@ -2,11 +2,15 @@ package cn.mirrorming.spring.cloud.alibaba.consumer.feign.controller;
 
 import cn.mirrorming.spring.cloud.alibaba.consumer.feign.service.ProviderService2;
 import cn.mirrorming.spring.cloud.alibaba.consumer.feign.service.ProviderService;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author mirror
@@ -20,8 +24,11 @@ public class ProviderController {
     private ProviderService2 providerService2;
 
     @GetMapping("echo")
-    public String echo() {
+    @SentinelResource(value = "getByCode")
+    public String echo(HttpServletRequest request) {
+        String token = request.getHeader("token");
         System.out.println("测试gateway");
+        System.out.println("token："+token);
         return providerService.echo("Feign Client");
     }
 
